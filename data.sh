@@ -10,16 +10,27 @@ while getopts i:n: flag
 do
     case "${flag}" in
         i) logfile=${OPTARG};;
-        n) nthfreq=${OPTARG};; ##Still not active
+        n) nthfreq=${OPTARG};;
     esac
 done
 
 
+
+
 # Gaussian log file
-file=${logfile} ##"py101_opt.log"
+file=${logfile}
 
 # No. of atoms
 Na=42
+# No. of frequencies
+FreqNo=$(expr 3 \* ${Na} - 6)
+
+if [[ ${nthfreq} -gt ${Na} ]]
+then
+	echo INPUT ERROR: There are only ${FreqNo} normal modes for the molecule. Re-enter a valid number n designating nth frequency mode.
+	exit
+fi
+
 
 # Frequency data from Gaussian
   # The above part (Number of frequency, Symmetry, Red. masses, IR Inten)
@@ -39,18 +50,47 @@ rm freq_eigvec_1.txt
 	# The following circus is because of the shitty log file gaussian gives
 	# Note that gaussian prints freqencies as 3 sets of coloumns
 
-div=$(expr ${nthfreq} / 3)
-row=$(expr ${div} + 1)
-mult=$(expr 3 \* ${div})
-coloumn=$(expr ${nthfreq} % ${mult})
+checkdivby3=$(expr ${nthfreq} % 3)
+	
+if [[ ${nthfreq} -le 3 ]]
+then
+	row=1
+	coloumn=${nthfreq}
+elif [[ ${checkdivby3} -eq 0 ]]
+then
+	div=$(expr ${nthfreq} / 3)
+	row=$(expr ${div} + 1)
+	mult=$(expr 3 \* ${div})
+	coloumn=3
+else
+	div=$(expr ${nthfreq} / 3)
+	row=$(expr ${div} + 1)
+	mult=$(expr 3 \* ${div})
+	coloumn=$(expr ${nthfreq} % ${mult})
+fi
+
 
 	# Getting the required row of 3 sets of eigenvectors from gaussian
 grep -A ${Na} -m ${row} 'Atom' freq_eigvec.txt | tail -n ${Na} > ${row}section.txt 
 
 	# Isolating the eigenvectors of nth frequency
-awk1=$(expr ${coloumn} + 2)
-awk2=$(expr ${coloumn} + 3)
-awk3=$(expr ${coloumn} + 4)
+
+if [[ ${coloumn} -eq 1 ]]
+then
+	awk1=$(expr ${coloumn} + 2)
+	awk2=$(expr ${coloumn} + 3)
+	awk3=$(expr ${coloumn} + 4)
+elif [[ ${coloumn} -eq 2 ]]
+then
+	awk1=$(expr ${coloumn} + 4)
+	awk2=$(expr ${coloumn} + 5)
+	awk3=$(expr ${coloumn} + 6)
+else
+	awk1=$(expr ${coloumn} + 6)
+	awk2=$(expr ${coloumn} + 7)
+	awk3=$(expr ${coloumn} + 8)
+fi
+
 
 # SOURCE: "https://stackoverflow.com/questions/19075671/how-do-i-use-shell-variables-in-an-awk-script"
 awk -v a="$awk1" -v b="$awk2" -v c="$awk3" '{print $a " " $b " " $c " "}' ${row}section.txt > ${nthfreq}.log
