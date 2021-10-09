@@ -4,7 +4,7 @@
 	* Adding command line variables
 	* i: input file
 	* n: Desired frequency mode
-COMMAND_LINE_VARIABLES
+COMMAND_LINE_VARIABLES 
 
 while getopts i:n: flag
 do
@@ -15,7 +15,7 @@ do
 done
 
 
-
+#----------------------------------------------------------------------------------------------------------------------
 
 # Gaussian log file
 file=${logfile}
@@ -25,14 +25,16 @@ Na=42
 # No. of frequencies
 FreqNo=$(expr 3 \* ${Na} - 6)
 
+# Exit status if user inputs insensible index for frequency mode
 if [[ ${nthfreq} -gt ${Na} ]]
 then
 	echo INPUT ERROR: There are only ${FreqNo} normal modes for the molecule. Re-enter a valid number n designating nth frequency mode.
 	exit
 fi
+#----------------------------------------------------------------------------------------------------------------------
 
 
-# Frequency data from Gaussian
+# Frequency data from Gaussian-----------------------------------------------------------------------------------------
   # The above part (Number of frequency, Symmetry, Red. masses, IR Inten)
 grep -r -i -B 5 "IR Inten    --" ${file} > freq_header.txt
 
@@ -44,7 +46,7 @@ rm freq_eigvec_1.txt
 # Grepping till the ${nthfreq} with each one having ${Na} atoms and tailing the last ${Na} sets of data\
 # SOURCE "https://unix.stackexchange.com/questions/115224/print-line-after-nth-occurrence-of-a-match"
 
-	# WARNING: Only if nthfreq > 3 and nthfreq is not divisible by 3-------------------------------------------------------
+	# WARNING: Only if nthfreq > 3 and nthfreq is not divisible by 3-----------------------------------------------
 
 
 	# The following circus is because of the shitty log file gaussian gives
@@ -98,9 +100,6 @@ awk -v a="$awk1" -v b="$awk2" -v c="$awk3" '{print $a " " $b " " $c " "}' ${row}
 
 rm *txt
 
-# NOTE FOR THE NEXT DAY: Now the code only works for freqeuncies which are greater than 3 and is not divisible by 3
-# Have to insert if loops and fix this shit
-# A problem for another time
-
+# Code execution success!!
 
 
