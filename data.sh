@@ -18,7 +18,7 @@ done
 #----------------------------------------------------------------------------------------------------------------------
 
 # Gaussian log file
-file=${logfile}
+file=${logfile} #NOTE: Gaussian version 16
 
 # No. of atoms
 Na=42
