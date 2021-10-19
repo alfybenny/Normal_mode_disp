@@ -6,6 +6,8 @@ import numpy as np
 import math
 import argparse
 
+# COMMAND_LINE_ARGUMENTS---------------------------------------------------------------------------
+# SOURCE: https://www.youtube.com/watch?v=cdblJqEUDNo
 parser = argparse.ArgumentParser(description = 'Arguments for defining the coefficients')
 parser.add_argument('scale_upto', type = float, help = 'The highest coefficient of vibrational displacement required')
 parser.add_argument('scale_step', type = float, help = 'The step size for interating from 0 to "scale_upto"')
@@ -13,16 +15,22 @@ args = parser.parse_args()
 
 # Importing the extracted eigenvectors into a matrix-----------------------------------------------
 ## UPGRADE: Use functions instead
-# SOURCE: https://stackoverflow.com/questions/7618858/how-to-to-read-a-matrix-from-a-given-file
-with open('freq.log', 'r') as f:
-    freq = [[float(num) for num in line.split(',')] for line in f if line.strip() != ""]
 
-with open('opt.xyz', 'r') as f:
-    coor = [[float(num) for num in line.split(',')] for line in f if line.strip() != ""]
+def create_matrix(filename):
+# SOURCE: https://stackoverflow.com/questions/7618858/how-to-to-read-a-matrix-from-a-given-file
+    with open(filename, 'r') as f:
+        matrix = [[float(num) for num in line.split(',')] for line in f if line.strip() != ""]
+    return matrix
+
+#with open('freq.log', 'r') as f:
+#    freq = [[float(num) for num in line.split(',')] for line in f if line.strip() != ""]
+
+#with open('opt.xyz', 'r') as f:
+#    coor = [[float(num) for num in line.split(',')] for line in f if line.strip() != ""]
 
 # Converting string matrix to float with numpy
-freq = np.array(freq)
-coor = np.array(coor)
+freq = np.array(create_matrix('freq.log'))
+coor = np.array(create_matrix('opt.xyz'))
 #--------------------------------------------------------------------------------------------------
 
 # SCALING------------------------------------------------------------------------------------------
