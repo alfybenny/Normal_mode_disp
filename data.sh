@@ -95,8 +95,7 @@ fi
 
 
 # SOURCE: "https://stackoverflow.com/questions/19075671/how-do-i-use-shell-variables-in-an-awk-script"
-awk -v a="$awk1" -v b="$awk2" -v c="$awk3" '{print $a " " $b " " $c " "}' ${row}section.txt > ${nthfreq}.log
-
+awk -v a="$awk1" -v b="$awk2" -v c="$awk3" '{printf "%8s %8s %8s\n", $a, $b, $c}' ${row}section.txt > ${nthfreq}.log
 
 rm *txt
 
