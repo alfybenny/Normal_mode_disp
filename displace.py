@@ -4,6 +4,12 @@
 
 import numpy as np
 import math
+import argparse
+
+parser = argparse.ArgumentParser(description = 'Arguments for defining the coefficients')
+parser.add_argument('scale_upto', type = float, help = 'The highest coefficient of vibrational displacement required')
+parser.add_argument('scale_step', type = float, help = 'The step size for interating from 0 to "scale_upto"')
+args = parser.parse_args()
 
 # Importing the extracted eigenvectors into a matrix-----------------------------------------------
 ## UPGRADE: Use functions instead
@@ -22,8 +28,8 @@ coor = np.array(coor)
 # SCALING------------------------------------------------------------------------------------------
 # Scaling the eigenvector so that we can simulate the vibration
 
-scale_upto = 
-scale_step = 
+print(args.scale_upto)
+print(args.scale_step) 
 
 
 disp = np.add(freq, coor)
