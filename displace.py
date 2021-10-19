@@ -9,6 +9,8 @@ import argparse
 # COMMAND_LINE_ARGUMENTS---------------------------------------------------------------------------
 # SOURCE: https://www.youtube.com/watch?v=cdblJqEUDNo
 parser = argparse.ArgumentParser(description = 'Arguments for defining the coefficients')
+parser.add_argument('file1', type = str, help = 'File containing first matrix')
+parser.add_argument('file2', type = str, help = 'File containing second matrix')
 parser.add_argument('scale_upto', type = float, help = 'The highest coefficient of vibrational displacement required')
 parser.add_argument('scale_step', type = float, help = 'The step size for interating from 0 to "scale_upto"')
 args = parser.parse_args()
@@ -22,15 +24,9 @@ def create_matrix(filename):
         matrix = [[float(num) for num in line.split(',')] for line in f if line.strip() != ""]
     return matrix
 
-#with open('freq.log', 'r') as f:
-#    freq = [[float(num) for num in line.split(',')] for line in f if line.strip() != ""]
-
-#with open('opt.xyz', 'r') as f:
-#    coor = [[float(num) for num in line.split(',')] for line in f if line.strip() != ""]
-
 # Converting string matrix to float with numpy
-freq = np.array(create_matrix('freq.log'))
-coor = np.array(create_matrix('opt.xyz'))
+freq = np.array(create_matrix(args.file1))
+coor = np.array(create_matrix(args.file2))
 #--------------------------------------------------------------------------------------------------
 
 # SCALING------------------------------------------------------------------------------------------
