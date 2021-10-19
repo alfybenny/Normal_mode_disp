@@ -1,10 +1,10 @@
 #!/bin/bash
 
-<< COMMAND_LINE_VARIABLES 
-	* Adding command line variables
-	* i: input file
-	* n: Desired frequency mode
-COMMAND_LINE_VARIABLES 
+# COMMAND_LINE_VARIABLES 
+#	* Adding command line variables
+#	* i: input file
+#	* n: Desired frequency mode
+# COMMAND_LINE_VARIABLES 
 
 while getopts i:n: flag
 do
