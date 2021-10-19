@@ -31,19 +31,18 @@ coor = np.array(create_matrix(args.file2))
 
 # SCALING------------------------------------------------------------------------------------------
 # Scaling the eigenvector so that we can simulate the vibration
+#Range creation
+start = -1 * args.scale_upto
+step = args.scale_step
+stop = args.scale_upto + step
 
-print(args.scale_upto)
-print(args.scale_step) 
+iterate_range = np.arange(start, stop, step)
+iterate_range = np.round(iterate_range, 5).tolist()
 
+for i in iterate_range:
+    print(np.add(coor, i * freq))
 
 disp = np.add(freq, coor)
 
-print(freq)
-print(coor)
+#print(disp)
 
-print(disp)
-#m = np.loadtxt('freq.log', dtype = 'f', delimiter=',')
-#n = np.loadtxt('opt.xyz', dtype = 'f', delimiter=',')
-
-#print(m)
-#print(n)
