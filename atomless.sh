@@ -6,7 +6,7 @@
 # COMMAND_LINE_VARIABLES
 #       * Adding command line variables
 #       * i: input file
-#       * n: Desired frequency mode
+#       * n: Desired frequency mode ### WARNING: for now n is not active
 # COMMAND_LINE_VARIABLES
 
 while getopts i:n: flag

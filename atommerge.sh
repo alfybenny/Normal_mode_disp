@@ -2,8 +2,8 @@
 
 # COMMAND_LINE_VARIABLES
 #       * Adding command line variables
-#       * i: input file
-#       * n: Desired frequency mode
+#       * a: filename1
+#       * b: filename2
 # COMMAND_LINE_VARIABLES
 
 while getopts a:b: flag
