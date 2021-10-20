@@ -50,7 +50,7 @@ for i in iterate_range:
 
 # Exporting to .csv
 disp = np.add(freq, coor)
-np.savetxt("test.csv", disp, delimiter= " ", fmt = '%10.5f')
+np.savetxt("out.csv", disp, delimiter= " ", fmt = '%10.5f')
 
 
 
