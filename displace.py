@@ -27,22 +27,31 @@ def create_matrix(filename):
 # Converting string matrix to float with numpy
 freq = np.array(create_matrix(args.file1))
 coor = np.array(create_matrix(args.file2))
-#--------------------------------------------------------------------------------------------------
 
+#--------------------------------------------------------------------------------------------------
 # SCALING------------------------------------------------------------------------------------------
 # Scaling the eigenvector so that we can simulate the vibration
-#Range creation
+# Range creation
 start = -1 * args.scale_upto
 step = args.scale_step
 stop = args.scale_upto + step
 
 iterate_range = np.arange(start, stop, step)
-iterate_range = np.round(iterate_range, 5).tolist()
+# Rounding_off
+iterate_range = np.round(iterate_range, 6).tolist()
 
+#--------------------------------------------------------------------------------------------------
+# ADDING-------------------------------------------------------------------------------------------
+# Addition of matrix with scaled matrix for all coefficients
 for i in iterate_range:
     print(np.add(coor, i * freq))
 
-disp = np.add(freq, coor)
+#--------------------------------------------------------------------------------------------------
 
-#print(disp)
+# Exporting to .csv
+disp = np.add(freq, coor)
+np.savetxt("test.csv", disp, delimiter= " ", fmt = '%10.5f')
+
+
+
 
