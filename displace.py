@@ -11,6 +11,7 @@ import argparse
 parser = argparse.ArgumentParser(description = 'Arguments for defining the coefficients')
 parser.add_argument('file1', type = str, help = 'File containing first matrix')
 parser.add_argument('file2', type = str, help = 'File containing second matrix')
+parser.add_argument('file3', type = str, help = 'File containing third matrix')
 parser.add_argument('scale_upto', type = float, help = 'The highest coefficient of vibrational displacement required')
 parser.add_argument('scale_step', type = float, help = 'The step size for interating from 0 to "scale_upto"')
 args = parser.parse_args()
@@ -25,8 +26,9 @@ def create_matrix(filename):
     return matrix
 
 # Converting string matrix to float with numpy
-freq = np.array(create_matrix(args.file1))
+freq1 = np.array(create_matrix(args.file1))
 coor = np.array(create_matrix(args.file2))
+freq2 = np.array(create_matrix(args.file3))
 
 #--------------------------------------------------------------------------------------------------
 # SCALING------------------------------------------------------------------------------------------
@@ -44,12 +46,13 @@ iterate_range = np.round(iterate_range, 6).tolist()
 # ADDING-------------------------------------------------------------------------------------------
 # Addition of matrix with scaled matrix for all coefficients
 for i in iterate_range:
-    print(np.add(coor, i * freq))
+    for j in iterate_range:
+        print(np.add(coor, i * freq1, j * freq2))
 
 #--------------------------------------------------------------------------------------------------
 
 # Exporting to .csv
-disp = np.add(freq, coor)
+disp = np.add(freq1, coor)
 np.savetxt("out.csv", disp, delimiter= " ", fmt = '%10.5f')
 
 

@@ -26,7 +26,7 @@ Na=42
 FreqNo=$(expr 3 \* ${Na} - 6)
 
 # Exit status if user inputs insensible index for frequency mode
-if [[ ${nthfreq} -gt ${Na} ]]
+if [[ ${nthfreq} -gt ${FreqNo} ]]
 then
 	echo INPUT ERROR: There are only ${FreqNo} normal modes for the molecule. Re-enter a valid number n designating nth frequency mode.
 	exit
