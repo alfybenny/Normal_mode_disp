@@ -15,21 +15,33 @@ do
     esac
 done
 
-echo ${logfile}
-echo ${nthfreq}
-echo ${nthfreq2}
-
-# frequency generation
+# frequency generation---------------------------
+# frequency 1
 ./data.sh -i ${logfile}.log -n ${nthfreq}
 mv freq.log freq1.log
+# frequency 2
 ./data.sh -i ${logfile}.log -n ${nthfreq2}
 mv freq.log freq2.log
 
-# coordinate generation
+# coordinate generation--------------------------
 ./atomless.sh -i ${logfile}.xyz
 
-# Eigenvector displacement
+# Eigenvector displacement-----------------------
+mkdir out #Folder to store the output
 python3 displace.py freq1.log opt.xyz freq2.log 1 0.1
 
-# .com file generation
-./atommerge.sh -a atom.xyz -b out.csv
+# .com file generation---------------------------
+cp atommerge.sh out/ # Copying naccessary files to output file
+cp atom.xyz out/
+cd out/
+
+for i in $(seq -f "%1.1f" 0 0.1 2)
+do
+	for j in $(seq -f "%1.1f" 0 0.1 2)
+	do
+		./atommerge.sh -a atom.xyz -b ${i}_${j} 
+	done
+done
+
+rm atommerge.sh *.xyz # Cleaning output folder
+cd ..

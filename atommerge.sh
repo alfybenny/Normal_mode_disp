@@ -14,4 +14,16 @@ do
     esac
 done
 
-paste -d " " ${file1} ${file2} > merge.xyz
+# .com file generation
+echo "%nprocshared=28
+%mem=128GB
+%chk=${file2}.chk
+# td(Nstates=20) cam-b3lyp/tzvp
+
+${file2}
+
+0 1
+$(paste -d " " ${file1} ${file2}.xyz)
+
+" > ${file2}.com
+

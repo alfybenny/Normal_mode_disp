@@ -5,6 +5,7 @@
 import numpy as np
 import math
 import argparse
+import os.path
 
 # COMMAND_LINE_ARGUMENTS---------------------------------------------------------------------------
 # SOURCE: https://www.youtube.com/watch?v=cdblJqEUDNo
@@ -39,6 +40,7 @@ step = args.scale_step
 stop = args.scale_upto + step
 
 iterate_range = np.arange(start, stop, step)
+
 # Rounding_off
 iterate_range = np.round(iterate_range, 6).tolist()
 
@@ -47,14 +49,14 @@ iterate_range = np.round(iterate_range, 6).tolist()
 # Addition of matrix with scaled matrix for all coefficients
 for i in iterate_range:
     for j in iterate_range:
-        print(np.add(coor, i * freq1, j * freq2))
+        
+        out1 = np.add(coor, i * 0.6 * freq1)
+        out = np.add(out1, j * 0.6 * freq2)
+        ii = round(1 + i, 2)
+        jj = round(1 + j, 2)
+        path = "out/{}_{}.xyz".format(str(ii), str(jj))
+        np.savetxt(path, out, delimiter = " ", fmt = '%10.5f')
 
 #--------------------------------------------------------------------------------------------------
-
-# Exporting to .csv
-disp = np.add(freq1, coor)
-np.savetxt("out.csv", disp, delimiter= " ", fmt = '%10.5f')
-
-
 
 
