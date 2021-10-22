@@ -12,4 +12,17 @@ $ ./data.sh -i &lt;gaussianfilename.log&gt; -n &lt;nth frequency&gt;
 Matrix scaling and addition<br>
 
 bash terminal command:<br>
-$ python3 displace.py &lt;filename1&gt; &lt;filename2&gt; &lt;scale_uptp&gt; &lt;scale_step&gt;
+$ python3 displace.py &lt;filename1&gt; &lt;filename2&gt; &lt;filename3&gt; &lt;scale_uptp&gt; &lt;scale_step&gt;
+
+3. atomless.sh:<br>
+Removing atom list
+
+4. atommerge.sh:<br>
+Creates .com files into out folder
+
+5. driver.sh
+The main driver code which runs all the above codes to proide n * m .com files 
+
+bash terminal command:<br>
+$ ./driver.sh -i &lt;logfile&gt; -n &lt;nthfreq&gt; -m &lt;mthfreq&gt;
+
