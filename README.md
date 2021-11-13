@@ -6,7 +6,10 @@ Executables:-<br>
 data.sh takes the eigenvectors of nth frequncy mode from a gaussian log file (GAUSSIAN VERSION: 16).<br>
 
 bash terminal command:-<br>
+
+'''shell
 $ ./data.sh -i &lt;gaussianfilename.log&gt; -n &lt;nth frequency&gt;
+'''
 
 2. displace.py:<br>
 Matrix scaling and addition<br>
