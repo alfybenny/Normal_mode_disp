@@ -8,15 +8,16 @@ data.sh takes the eigenvectors of nth frequncy mode from a gaussian log file (GA
 bash terminal command:-<br>
 
 ```shell
-$ ./data.sh -i &lt;gaussianfilename.log&gt; -n &lt;nth frequency&gt;
+$ ./data.sh -i gaussianfilename.log -n nth frequency
 ```
 
 2. displace.py:<br>
 Matrix scaling and addition<br>
 
 bash terminal command:<br>
-$ python3 displace.py &lt;filename1&gt; &lt;filename2&gt; &lt;filename3&gt; &lt;scale_uptp&gt; &lt;scale_step&gt;
-
+```shell
+$ python3 displace.py filename1 filename2 filename3 scale_from scale_step scale_to
+```
 3. atomless.sh:<br>
 Removing atom list
 
@@ -27,5 +28,7 @@ Creates .com files into out folder
 The main driver code which runs all the above codes to proide n * m .com files 
 
 bash terminal command:<br>
-$ ./driver.sh -i &lt;logfile&gt; -n &lt;nthfreq&gt; -m &lt;mthfreq&gt;
 
+```shell
+$ ./driver.sh -i logfile -n nthfreq -m mthfreq
+```
