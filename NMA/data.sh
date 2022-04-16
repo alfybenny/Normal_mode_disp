@@ -95,7 +95,7 @@ fi
 
 #NOTE: The "," delimiter is used for the ease of execution of displace.py
 # SOURCE: "https://stackoverflow.com/questions/19075671/how-do-i-use-shell-variables-in-an-awk-script"
-awk -v a="$awk1" -v b="$awk2" -v c="$awk3" '{print $a","$b","$c}' ${row}section.txt > freq.log
+awk -v a="$awk1" -v b="$awk2" -v c="$awk3" '{print $a","$b","$c}' ${row}section.txt > ${nthfreq}.log
 
 rm *txt
 
